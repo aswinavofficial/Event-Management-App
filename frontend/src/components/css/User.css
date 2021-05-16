@@ -1,0 +1,18 @@
+.user-list {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    max-width: 800px;
+    flex-wrap: wrap;
+
+}
+
+
+.user {
+
+    display: flex;
+    flex-direction: row;
+  
+  }

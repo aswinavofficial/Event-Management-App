@@ -40,7 +40,8 @@ public class UserServiceImpl implements UserService {
 	public UserDTO createUser(UserDTO userDTO) {
 				
 
-		if (userRepository.findById(userDTO.getId()).isPresent()) {
+		if (userDTO !=null && userDTO.getId() !=null &&
+				userRepository.findById(userDTO.getId()).isPresent()) {
 			
 			throw new UserExists("Duplicate Id");
 			

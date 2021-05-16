@@ -31,7 +31,7 @@ public class UserController {
 	private UserService userService;
 		
 	
-	@RequestMapping(value="/",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<UserDTO> getAllUsers() {
 				
 		List<UserDTO> users = userService.getAllUsers();
@@ -40,7 +40,7 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value="/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) {
 				
 		userDTO = userService.createUser(userDTO);

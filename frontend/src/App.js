@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import NavBar from './components/NavBar';
+import User from './components/User';
+import LoadingOverlay from 'react-loading-overlay';
+
 import './App.css';
 
+
+
 function App() {
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const toggleIsLoading = (value) => {
+
+    setIsLoading(value);
+
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoadingOverlay
+      active={isLoading}
+      spinner
+      text='Loading ...'
+    >
+      <div className="App">
+
+
+        <NavBar />
+
+        <div className="container">
+          <User isLoading={toggleIsLoading} />
+
+        </div>
+
+
+
+      </div>
+    </LoadingOverlay>
+
   );
 }
 

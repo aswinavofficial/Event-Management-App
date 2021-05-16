@@ -1,0 +1,10 @@
+.create-user-form {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item {
+
+    margin: 20px 20px;
+}
