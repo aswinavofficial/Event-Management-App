@@ -18,7 +18,7 @@ function App() {
   };
 
   return (
-    <LoadingOverlay
+    <LoadingOverlay class= "loading-overlay"
       active={isLoading}
       spinner
       text='Loading ...'

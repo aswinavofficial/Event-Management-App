@@ -1,10 +1,27 @@
 .create-user-form {
 
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
+    background-color: whitesmoke;
 }
 
-.form-item {
+.form-label {
 
-    margin: 20px 20px;
+    display: block;
+
 }
+
+.form-container {
+
+    border: 1px solid #dfdfdf;
+    width: 50%;
+    margin :20px auto;
+    padding : 10px;
+}
+
+.form-group {
+    margin : 10px;
+    padding: 10px;
+}
+
+

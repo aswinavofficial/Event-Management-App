@@ -42,6 +42,10 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) {
+		
+		log.info("PUT /user");
+		log.info(userDTO.toString());
+		
 				
 		userDTO = userService.createUser(userDTO);
 		
