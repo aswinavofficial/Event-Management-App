@@ -1,6 +1,6 @@
 # Eventify
 
-[Frontend](https://zen-goldwasser-eec9a3.netlify.app)
+[Frontend](https://eventify-app.netlify.app)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cc3191eb-0970-4cce-9729-966d60b3be06/deploy-status)](https://app.netlify.com/sites/eventify-app/deploys)
 
