@@ -1,4 +1,4 @@
-# Event-Management-App
+# Eventify
 
 [Frontend](https://zen-goldwasser-eec9a3.netlify.app)
 
