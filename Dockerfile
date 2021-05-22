@@ -21,4 +21,4 @@ FROM adoptopenjdk/openjdk11:alpine-slim
 COPY --from=builder /app/target/eventify-*.jar /eventify.jar
 
 # Run the web service on container startup.
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/eventify.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "--spring.profiles.active=gcloudrun","-jar", "/eventify.jar"]
