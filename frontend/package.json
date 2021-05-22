@@ -2,7 +2,7 @@
   "name": "eventify-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8027",
+  "proxy": "https://eventify-2aknj4a4kq-el.a.run.app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
