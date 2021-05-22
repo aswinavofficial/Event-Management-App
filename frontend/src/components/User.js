@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserCard from './UserCard';
 import CreateUser from './CreateUser';
 import Modal from './Modal';
+import {BASE_URL} from '../Settings';
 
 
 import './css/User.css';
@@ -17,7 +18,7 @@ function User({ isLoading }) {
 
     isLoading(true);
 
-    fetch('/user')
+    fetch(BASE_URL + '/user')
       .then(res => res.json())
       .then(data => {
         setUsers(data)
@@ -40,7 +41,7 @@ function User({ isLoading }) {
       body: JSON.stringify(user)
     }
 
-    fetch('/user', options)
+    fetch(BASE_URL + '/user', options)
       .then(res => 
         
         {
@@ -79,7 +80,7 @@ function User({ isLoading }) {
       method: 'DELETE'
     }
 
-    fetch('/user/' + id, options)
+    fetch(BASE_URL + '/user/' + id, options)
       .then(res => {
         console.log(res)
         getAllUsers()
@@ -103,7 +104,7 @@ function User({ isLoading }) {
       body: JSON.stringify(user)
     }
 
-    fetch('/user/'+ user.id, options)
+    fetch(BASE_URL + '/user/'+ user.id, options)
       .then(res => res.json())
       .then(data => {
         console.log(data)
