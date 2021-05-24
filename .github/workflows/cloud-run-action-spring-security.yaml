@@ -36,7 +36,7 @@ jobs:
 
       - name: Deploy
         run: |
-          gcloud run deploy eventify \
+          gcloud run deploy eventify-springsecurity \
           --region asia-south1 \
           --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:springsecurity \
           --platform managed \
