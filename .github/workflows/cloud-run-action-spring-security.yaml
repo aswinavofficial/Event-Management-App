@@ -28,17 +28,17 @@ jobs:
       
       - name: Build
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:spring-security
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:springsecurity .
 
       - name: Push
         run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:spring-security
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:springsecurity
 
       - name: Deploy
         run: |
-          gcloud run deploy eventify \
+          gcloud run deploy eventify-springsecurity \
           --region asia-south1 \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:spring-security \
+          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:springsecurity \
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
