@@ -28,7 +28,7 @@ jobs:
       
       - name: Build
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:springsecurity
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/eventify:springsecurity .
 
       - name: Push
         run: |
