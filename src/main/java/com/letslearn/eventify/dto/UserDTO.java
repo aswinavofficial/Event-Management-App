@@ -82,7 +82,6 @@ public class UserDTO {
 		return password;
 	}
 
-	@JsonIgnore
 	public void setPassword(String password) {
 		this.password = password;
 	}

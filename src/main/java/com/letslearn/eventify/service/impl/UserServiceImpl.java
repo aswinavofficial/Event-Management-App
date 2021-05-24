@@ -5,11 +5,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.letslearn.eventify.dto.UserDTO;
 import com.letslearn.eventify.exception.UserExists;
 import com.letslearn.eventify.exception.UserNotFoundException;
+import com.letslearn.eventify.model.Role;
 import com.letslearn.eventify.model.User;
 import com.letslearn.eventify.repository.UserRepository;
 import com.letslearn.eventify.service.UserService;
@@ -20,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 
 	@Override
@@ -90,6 +95,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
+	
 
 	@Override
 	public UserDTO updateUserDetailsById(UUID id, UserDTO userDto) {
@@ -115,6 +121,45 @@ public class UserServiceImpl implements UserService {
 
 			throw new UserNotFoundException(id);
 		}
+	}
+	
+	
+	@Override
+	public UserDTO registerUser(UserDTO userDTO) {
+				
+
+		if (userDTO !=null && userDTO.getId() !=null &&
+				userRepository.findById(userDTO.getId()).isPresent()) {
+			
+			throw new UserExists("Duplicate Id");
+			
+		}
+		
+		if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+			
+			throw new UserExists("Duplicate Email");
+			
+		}
+		
+		if (userRepository.findByUserName(userDTO.getUserName()).isPresent()) {
+			
+			throw new UserExists("Duplicate User Name");
+			
+		}
+		
+		if (userRepository.findByMobileNumber(userDTO.getMobileNumber()).isPresent()) {
+			
+			throw new UserExists("Duplicate Mobile Number");
+			
+		}
+		
+		
+
+		User user = ObjectMapperUtils.map(userDTO, User.class);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		userDTO = ObjectMapperUtils.map(userRepository.save(user), UserDTO.class);
+
+		return userDTO;
 	}
 
 

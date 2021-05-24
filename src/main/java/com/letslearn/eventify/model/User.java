@@ -1,27 +1,35 @@
 package com.letslearn.eventify.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-
-import javax.persistence.Index;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
 @Table(name = "User",
 indexes = {@Index(name = "email_index",  columnList="email", unique = true),
-        @Index(name = "mobile_index", columnList="mobileNumber", unique = true),
-        @Index(name = "username_index", columnList="userName", unique = true)})
-public class User {
+        @Index(name = "mobile_index", columnList="mobile_number", unique = true),
+        @Index(name = "username_index", columnList="user_name", unique = true)})
+public class User implements UserDetails{
 	
+	private static final long serialVersionUID = 7637238970851521842L;
+
 	@Id
 	@Column(name="id",unique=true)
 	@Type(type="org.hibernate.type.UUIDCharType")
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
     private UUID id;
 	
 	@Column(name="email",unique=true)
@@ -31,12 +39,33 @@ public class User {
 	
 	private String lastName;
 	
+	@Column(name="user_name",unique=true)
 	private String userName;
 	
-	@Column(name="mobileNumber",unique=true)
+	@Column(name="mobile_number",unique=true)
 	private String mobileNumber;
 	
 	private String password;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+            )
+    private Set<Role> roles = new HashSet<>();
+	
+	@Column(name = "account_non_expired", columnDefinition="tinyint(1) default 1")
+	private boolean accountNonExpired;
+
+	@Column(name = "account_non_locked", columnDefinition="tinyint(1) default 1")
+	private boolean accountNonLocked;
+
+	@Column(name = "credentials_non_expired", columnDefinition="tinyint(1) default 1")
+	private boolean credentialsNonExpired;
+
+	@Column(name = "enabled", columnDefinition="tinyint(1) default 1")
+	private boolean enabled;
 
 	public UUID getId() {
 		return id;
@@ -93,5 +122,63 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        
+        for (Role role : this.roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.userName;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return this.accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return this.accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return this.credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	
+	
 
 }

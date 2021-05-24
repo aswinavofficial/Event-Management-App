@@ -18,5 +18,7 @@ public interface UserService {
 	
 	public void deleteUser(UUID id);
 
+	public UserDTO registerUser(UserDTO userDTO);
+
 
 }
