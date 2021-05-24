@@ -36,7 +36,7 @@ public class AuthController {
 	AuthenticationManager authenticationManager;
 	
 	
-	@RequestMapping(value="login",method = RequestMethod.GET)
+	@RequestMapping(value="login",method = RequestMethod.POST)
 	public Object login(@RequestBody LoginDTO loginDTO) {
 		
 	    UsernamePasswordAuthenticationToken authRequest 
