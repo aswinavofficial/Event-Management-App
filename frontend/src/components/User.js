@@ -19,12 +19,33 @@ function User({ isLoading }) {
     isLoading(true);
 
     fetch(BASE_URL + '/user')
-      .then(res => res.json())
+    .then(res => 
+        
+      {
+        if(!res.ok){
+          console.log("GET /user failed " + res.status)
+          throw res}
+            
+        return res.json()
+
+      })
       .then(data => {
         setUsers(data)
         isLoading(false);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err) 
+
+        err.text()
+        .then(errMessage => {
+
+          console.log(errMessage)
+          setErrorMessage(errMessage)
+          isLoading(false);
+
+        })
+        
+      });
   }
 
   const createUser = (user) => {

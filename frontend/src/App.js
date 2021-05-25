@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import NavBar from './components/NavBar';
 import User from './components/User';
+import Login from './components/Login';
+import Register from './components/Register';
 import LoadingOverlay from 'react-loading-overlay';
 
 import './App.css';
@@ -29,10 +31,14 @@ function App() {
         <NavBar />
 
         <div className="container">
-          <User isLoading={toggleIsLoading} />
+        { /**  <User isLoading={toggleIsLoading} />  */ }
 
+       
         </div>
 
+        <Login />
+
+        <Register />
 
 
       </div>
