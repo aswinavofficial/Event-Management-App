@@ -3,6 +3,7 @@ package com.letslearn.eventify.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -20,12 +22,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.letslearn.eventify.filter.JwtRequestFilter;
 import com.letslearn.eventify.service.impl.UserDetailsServiceImpl;
 
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
+
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -88,10 +99,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/public/**").permitAll()
 		.antMatchers("/auth/**").permitAll()
-//		.antMatchers("/delete/**").hasAuthority("ADMIN")
+//		.antMatchers("/admin/**").hasAuthority("ADMIN")
 		.anyRequest().authenticated()
-		.and().formLogin().permitAll().and().csrf().disable();
-		// Disabled CSRF;
+		.and().formLogin().disable()
+		.csrf().disable()
+		.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+		.and()
+		.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
+		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
 	}
 	
 	 @Override
