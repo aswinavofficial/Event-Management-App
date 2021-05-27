@@ -1,4 +1,5 @@
 import React from 'react';
+import Logout from './Logout';
 import './css/NavBar.css'
 
 function NavBar() {
@@ -7,6 +8,8 @@ function NavBar() {
 
         <div className="navbar">
             NAVBAR
+
+        <Logout />
         </div>
     )
 

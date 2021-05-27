@@ -138,7 +138,59 @@ function User({ isLoading }) {
 
   useEffect(() => {
 
-    getAllUsers()
+    let isMounted = true;               
+
+    isLoading(true);
+
+
+    const options = {
+      method : 'GET',
+      mode   : 'cors',
+      headers : {
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
+      }
+
+
+  }
+
+    fetch(BASE_URL + '/user',options)
+    .then(res => 
+        
+      {
+        if(!res.ok){
+          console.log("GET /user failed " + res.status)
+          throw res}
+            
+        return res.json()
+
+      })
+      .then(data => {
+
+        if(isMounted) {
+          setUsers(data)
+      }
+        isLoading(false);
+      })
+      .catch(err => {
+        console.error(err) 
+
+      /** 
+        err.text()
+        .then(errMessage => {
+
+          console.log(errMessage)
+          if(isMounted) {
+            setErrorMessage(errMessage)
+          }
+          isLoading(false);
+
+        }) */
+
+        
+        
+      });
+
+    return () => { isMounted = false }; 
 
   }, []);
 

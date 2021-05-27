@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import {BASE_URL} from '../Settings';
+import {useHistory,Link} from 'react-router-dom';
+
 const Login = () => {
+
+    const history = useHistory();
 
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
@@ -39,6 +43,7 @@ const Login = () => {
             console.log(data)
             window.localStorage.setItem('jwt',data.jwt);
             window.localStorage.setItem('userDetails',JSON.stringify(data.userDetails));
+            history.push('/');
         })
 
     }
@@ -69,6 +74,8 @@ const Login = () => {
                 />
 
             </form>
+
+            <Link to="/register">Register</Link>
         </div>
     )
 }
