@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+import UserContext from '../contexts/UserContext';
 import {BASE_URL} from '../Settings';
 import {useHistory,Link} from 'react-router-dom';
+import './css/Login.css';
 
 const Login = () => {
 
     const history = useHistory();
+    const {state,dispatch} = useContext(UserContext);
 
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
@@ -43,35 +47,43 @@ const Login = () => {
             console.log(data)
             window.localStorage.setItem('jwt',data.jwt);
             window.localStorage.setItem('userDetails',JSON.stringify(data.userDetails));
+            dispatch({ type: "USER", payload: data.userDetails })
             history.push('/');
         })
 
     }
 
     return(
-        <div>
+        <div className="login">
             <h1>Login</h1>
 
             <form onSubmit={login}>
 
-                <label>
-                    Username
+            <div className="form-group">
+                <label className="form-item">
+                    Username :
                 </label>
-                <input type="text" 
+                <input type="text" className="form-item"
                 value={username} 
                 onChange={ e=>setUsername(e.target.value)}/>
+            </div>
 
-                <label>
-                    Password
+            <div className="form-group">
+
+                <label className="form-item">
+                    Password :
                 </label>
 
-                <input type="password"
+                <input type="password" className="form-item"
                 value = {password}
                 onChange = { e=>setPassword(e.target.value)} />
 
-                <input type="submit"
-                  
-                />
+            </div>
+
+            <div className="form-group">
+
+                <input className="form-item submit-button" type="submit"/>
+            </div>
 
             </form>
 

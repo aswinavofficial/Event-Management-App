@@ -1,22 +1,29 @@
-import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {Redirect, useHistory} from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
+import {AiOutlineLogout} from 'react-icons/ai';
+import './css/Logout.css';
 
 const Logout = () => {
 
-    const [loggedOut, setLoggedOut] = useState(false)
+    const {state,dispatch} = useContext(UserContext);
+
+    const history = useHistory();
   
     const logout = () => {
       localStorage.removeItem("jwt");
       localStorage.removeItem("userDetails");
-      setLoggedOut(true)
-  
+      dispatch({ type: "CLEAR"})
+      history.push('/login');
     };
   
-    if (loggedOut) {
+    if (state ==null) {
       return <Redirect to="/login" push={true} />
     }
-  
-    return <button onClick={logout}>LogOut</button>;
+   else {
+    // return <button className="logout-button" onClick={logout}>Logout</button>;
+    return <AiOutlineLogout size={33} className="logout-icon" onClick={logout}/>
+   }
   };
 
 

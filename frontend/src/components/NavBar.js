@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Logout from './Logout';
+import UserContext from '../contexts/UserContext';
+import {FaUserCircle} from 'react-icons/fa';
+import {AiOutlineUser} from 'react-icons/ai';
 import './css/NavBar.css'
-
+import EventifyLogo from './images/eventify-logo.png';
 function NavBar() {
 
-    return(
+    const { state, dispatch } = useContext(UserContext);
 
-        <div className="navbar">
-            NAVBAR
 
-        <Logout />
-        </div>
-    )
+    if (state != null) {
+        return (
+            <div className="navbar">
+
+                <div className="nav-brand">
+                    <Link to="/">
+                        <img className="eventify-logo" src={EventifyLogo} alt="EVENTIFY" />
+                    </Link>
+                </div>
+
+                <div className="user-block">
+                <Link className="link" to="/profile">
+                <AiOutlineUser size={33} className="nav-userprofile"/>
+                </Link>
+
+                <div className="nav-logout">
+                    <Logout />
+                </div>
+
+                </div>
+
+
+            </div>
+        )
+    }
+    else {
+        return (
+
+            <div className="navbar">
+                <Link to="/">
+                    <img className="eventify-logo" src={EventifyLogo} alt="EVENTIFY" />
+                </Link>
+            </div>
+
+        )
+    }
 
 }
 

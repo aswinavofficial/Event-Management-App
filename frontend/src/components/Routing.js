@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {
         Switch,
         Route,
@@ -7,17 +7,22 @@ import {
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
+import Profile from './Profile';
+import UserContext from '../contexts/UserContext';
 
 
 const Routing = () => {
 
-    const history = useHistory()
+    const history = useHistory();
+    const { state, dispatch } = useContext(UserContext)
+
 
   useEffect(() => {
 
     const user = JSON.parse(localStorage.getItem("userDetails"))
 
     if (user) {
+      dispatch({ type: "USER", payload: user })
       history.push("/")
     }
     else {
@@ -35,9 +40,13 @@ const Routing = () => {
           <Route path="/register">
           <Register />
           </Route>
+          <Route path="/profile">
+          <Profile />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
+
 
         </Switch>
     )
