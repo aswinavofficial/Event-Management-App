@@ -7,7 +7,7 @@ import {BASE_URL} from '../Settings';
 
 import './css/User.css';
 
-function User({ isLoading }) {
+function User() {
 
   const [users, setUsers] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -15,8 +15,6 @@ function User({ isLoading }) {
 
 
   function getAllUsers() {
-
-    isLoading(true);
 
     fetch(BASE_URL + '/user')
     .then(res => 
@@ -31,7 +29,6 @@ function User({ isLoading }) {
       })
       .then(data => {
         setUsers(data)
-        isLoading(false);
       })
       .catch(err => {
         console.error(err) 
@@ -41,7 +38,6 @@ function User({ isLoading }) {
 
           console.log(errMessage)
           setErrorMessage(errMessage)
-          isLoading(false);
 
         })
         
@@ -51,8 +47,6 @@ function User({ isLoading }) {
   const createUser = (user) => {
 
     hideModal();
-    isLoading(true);
-
     const options = {
       method: 'POST',
       mode: 'cors',
@@ -85,7 +79,6 @@ function User({ isLoading }) {
 
           console.log(errMessage)
           setErrorMessage(errMessage)
-          isLoading(false);
 
         })
         
@@ -95,7 +88,6 @@ function User({ isLoading }) {
 
   const deleteUser = (id) => {
 
-    isLoading(true);
 
     const options = {
       method: 'DELETE'
@@ -114,7 +106,6 @@ function User({ isLoading }) {
   const editUser = (user) => {
 
     hideModal();
-    isLoading(true);
 
     const options = {
       method: 'PUT',
@@ -139,9 +130,6 @@ function User({ isLoading }) {
   useEffect(() => {
 
     let isMounted = true;               
-
-    isLoading(true);
-
 
     const options = {
       method : 'GET',
@@ -169,7 +157,6 @@ function User({ isLoading }) {
         if(isMounted) {
           setUsers(data)
       }
-        isLoading(false);
       })
       .catch(err => {
         console.error(err) 

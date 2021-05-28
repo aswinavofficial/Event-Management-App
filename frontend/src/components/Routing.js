@@ -7,7 +7,9 @@ import {
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
+import User from './User';
 import Profile from './Profile';
+import Events from './Events';
 import UserContext from '../contexts/UserContext';
 
 
@@ -39,6 +41,12 @@ const Routing = () => {
           </Route>
           <Route path="/register">
           <Register />
+          </Route>
+          <Route path="/users">
+          <User />
+          </Route>
+          <Route path="/events">
+          <Events />
           </Route>
           <Route path="/profile">
           <Profile />

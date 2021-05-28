@@ -16,7 +16,18 @@
     width:100%;
   
   }
+
+  .item-box {
+    margin: 20px;
+    border : 1px solid black;
+    padding: 25px 20px 5px 20px;
+    width: 200px;
+  }
   
+  .img-icon {
+    height: 75px;
+    width: 75px;
+  }
   
   
   

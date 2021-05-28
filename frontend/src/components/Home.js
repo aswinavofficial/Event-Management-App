@@ -1,38 +1,43 @@
-import React, {useState} from 'react';
-import LoadingOverlay from 'react-loading-overlay';
-import User from './User';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import UsersImg from './images/users.png';
+import EventsImg from './images/events.png';
+
 import './css/Home.css';
+import { useHistory } from 'react-router-dom';
 
 const Home = () =>  {
 
-    const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
-  const toggleIsLoading = (value) => {
 
-    setIsLoading(value);
-
-  };
 
   return(
-    <LoadingOverlay class= "loading-overlay"
-    active={isLoading}
-    spinner
-    text='Loading ...'
-  >
 
 <div className="Home">
 
 <div className="container">
-  
-  <User isLoading={toggleIsLoading} /> 
 
+<Link className="link" to="/users">
+
+<div className="item-box">
+<img className="img-icon" src={UsersImg} alt="USERS" />
+
+<p>Users</p>
+</div>
+</Link>
+
+<Link className="link" to="/events">
+
+<div className="item-box">
+<img className="img-icon" src={EventsImg} alt="EVENTS" />
+<p>Events</p>
+</div>
+</Link>
 
 </div>
-
 </div>
 
-
-</LoadingOverlay>
   )
 
 }
