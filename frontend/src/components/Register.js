@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link } from 'react-router-dom';
 import {BASE_URL} from '../Settings';
 import './css/Register.css';
 
@@ -59,7 +59,7 @@ const Register = () => {
       }
 
     return(
-        <div>
+        <div className="register-container">
             <h1>Register</h1>
 
             <form onSubmit = {register}>
@@ -103,10 +103,12 @@ const Register = () => {
             </div>
 
             <div className="form-group">
-            <input type='submit'/>
+            <input className="submit-button" type='submit'/>
             </div>
 
             </form>
+
+            <Link to="/login">Login</Link>
         </div>
     )
 
