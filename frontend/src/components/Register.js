@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {BASE_URL} from '../Settings';
+import './css/Register.css';
 
 
 const Register = () => {
 
-    /** 
-    {
-        "email": "string",
-        "firstName": "string",
-        "id": "string",
-        "lastName": "string",
-        "mobileNumber": "string",
-        "password": "string",
-        "userName": "string"
-      }  */
+    const history = useHistory();
 
       const [email,setEmail] = useState("");
       const [firstName,setFirstName] = useState("");
@@ -51,9 +44,11 @@ const Register = () => {
                 console.log('Register failed ' + res.status)
                 throw res;
             }
+            return res.json();
         })
         .then(data => {
             console.log("Register Response : " + JSON.stringify(data));
+            history.push('/login');
 
         })
         .catch(err => {
@@ -63,50 +58,53 @@ const Register = () => {
 
       }
 
-      /** 
-    {
-        "email": "string",
-        "firstName": "string",
-        "id": "string",
-        "lastName": "string",
-        "mobileNumber": "string",
-        "password": "string",
-        "userName": "string"
-      }  */
-
     return(
         <div>
             <h1>Register</h1>
 
             <form onSubmit = {register}>
 
-            <label>First Name</label>
-            <input value={firstName}
+            <div className="form-group">
+            <label className="form-item">First Name</label>
+            <input value={firstName} className="form-item"
             onChange={e => setFirstName(e.target.value)}/>
+            </div>
 
-            <label>Last Name</label>
-            <input value={lastName}
+            <div className="form-group">
+            <label className="form-item">Last Name</label>
+            <input value={lastName} className="form-item"
             onChange={e=> setLastName(e.target.value)}/>
+            </div>
 
-            <label>Username</label>
-            <input value={userName}
+            <div className="form-group">
+            <label className="form-item">Username</label>
+            <input value={userName} className="form-item"
             onChange = {e=> setUserName(e.target.value)}
             />
+            </div>
 
-            <label>Email</label>
-            <input value={email}
+            <div className="form-group">
+            <label className="form-item">Email</label>
+            <input value={email} className="form-item"
             onChange = {e=> setEmail(e.target.value)}
             />
+            </div>
 
-            <label> Mobile Number</label>
-            <input value={mobileNumber} 
+            <div className="form-group">
+            <label className="form-item"> Mobile Number</label>
+            <input value={mobileNumber} className="form-item" 
             onChange={e=> setMobileNumber(e.target.value)}/>
+            </div>
 
-            <label>Password</label>
-            <input value={password}
+            <div className="form-group">
+            <label className="form-item">Password</label>
+            <input value={password} className="form-item"
             onChange = {e=> setPassword(e.target.value)} />
+            </div>
 
+            <div className="form-group">
             <input type='submit'/>
+            </div>
 
             </form>
         </div>

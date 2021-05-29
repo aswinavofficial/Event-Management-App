@@ -19,7 +19,7 @@ const Event = ({event}) => {
                 {event.status}  <br/>
                 {event.public}   <br/>
                 {event.online}  <br/>
-                <QRCode value={event.id} size="100" />
+                <QRCode value={event.id} size={100} />
 
         </div>
     )
