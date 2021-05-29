@@ -16,7 +16,15 @@ function User() {
 
   function getAllUsers() {
 
-    fetch(BASE_URL + '/user')
+    const options = {
+      method : 'GET',
+      mode   : 'cors',
+      headers : {
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
+      }
+    }
+
+    fetch(BASE_URL + '/user', options)
     .then(res => 
         
       {
@@ -51,7 +59,8 @@ function User() {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
       },
       body: JSON.stringify(user)
     }
@@ -90,7 +99,10 @@ function User() {
 
 
     const options = {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers : {
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
+      }
     }
 
     fetch(BASE_URL + '/user/' + id, options)
@@ -111,7 +123,8 @@ function User() {
       method: 'PUT',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
       },
       body: JSON.stringify(user)
     }

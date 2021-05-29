@@ -29,12 +29,12 @@ function NavBar() {
 
                 </div>
 
-                <div className="nv-users">
+                {/* <div className="nv-users">
                 <Link className="link" to="/users">
                 <FaUserFriends size={33} />
                 </Link>
 
-                </div>
+                </div> */}
 
                 <div className="user-block">
                 <Link className="link" to="/profile">

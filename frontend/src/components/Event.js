@@ -1,4 +1,6 @@
 import React from 'react';
+import QRCode from "react-qr-code";
+
 import './css/Event.css';
 
 const Event = ({event}) => {
@@ -17,6 +19,7 @@ const Event = ({event}) => {
                 {event.status}  <br/>
                 {event.public}   <br/>
                 {event.online}  <br/>
+                <QRCode value={event.id} size="100" />
 
         </div>
     )
