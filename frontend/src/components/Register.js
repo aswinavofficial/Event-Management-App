@@ -66,40 +66,42 @@ const Register = () => {
 
             <div className="form-group">
             <label className="form-item">First Name</label>
-            <input value={firstName} className="form-item"
+            <input value={firstName} className="form-item" required={true}
             onChange={e => setFirstName(e.target.value)}/>
             </div>
 
             <div className="form-group">
             <label className="form-item">Last Name</label>
-            <input value={lastName} className="form-item"
+            <input value={lastName} className="form-item" required={true}
             onChange={e=> setLastName(e.target.value)}/>
             </div>
 
             <div className="form-group">
             <label className="form-item">Username</label>
-            <input value={userName} className="form-item"
+            <input value={userName} className="form-item" required={true}
             onChange = {e=> setUserName(e.target.value)}
             />
             </div>
 
             <div className="form-group">
             <label className="form-item">Email</label>
-            <input value={email} className="form-item"
+            <input input type="email" value={email} className="form-item" required={true}
             onChange = {e=> setEmail(e.target.value)}
             />
             </div>
 
             <div className="form-group">
             <label className="form-item"> Mobile Number</label>
-            <input value={mobileNumber} className="form-item" 
+            <input type="tel" value={mobileNumber} pattern="[0-9]{10}" className="form-item"  required={true}
             onChange={e=> setMobileNumber(e.target.value)}/>
             </div>
 
             <div className="form-group">
             <label className="form-item">Password</label>
-            <input value={password} className="form-item"
+            <input type="password" minlength="8"
+             value={password} className="form-item" required={true}
             onChange = {e=> setPassword(e.target.value)} />
+
             </div>
 
             <div className="form-group">

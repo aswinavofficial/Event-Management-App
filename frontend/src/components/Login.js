@@ -8,6 +8,7 @@ const Login = () => {
 
     const history = useHistory();
     const {state,dispatch} = useContext(UserContext);
+    const [errorMessage,setErrorMessage] = useState();
 
     const [username,setUsername] = useState("")
     const [password,setPassword] = useState("")
@@ -38,6 +39,8 @@ const Login = () => {
             if(!res.ok)
                {
                    console.log("Login failed " + res.status)
+                   setErrorMessage("Invalid Credentials");
+
                    throw res;
                }
                return res.json();
@@ -62,9 +65,14 @@ const Login = () => {
                 <label className="form-item">
                     Username :
                 </label>
-                <input type="text" className="form-item"
+                <input type="text" className="form-item" required={true}
                 value={username} 
-                onChange={ e=>setUsername(e.target.value)}/>
+                onChange={ e=>
+                {
+                    setUsername(e.target.value)
+                    setErrorMessage("")
+                }
+                }/>
             </div>
 
             <div className="form-group">
@@ -74,15 +82,25 @@ const Login = () => {
                 </label>
 
                 <input type="password" className="form-item"
-                value = {password}
-                onChange = { e=>setPassword(e.target.value)} />
+                value = {password} required={true}
+                onChange = { e=> {
+                    setPassword(e.target.value)
+                    setErrorMessage("")
+
+                }
+                 } />
 
             </div>
 
             <div className="form-group">
 
                 <input className="form-item submit-button" type="submit"/>
+            
+
             </div>
+
+            {errorMessage}
+
 
             </form>
 
