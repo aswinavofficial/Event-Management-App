@@ -3,7 +3,7 @@ name: publish-spring-security
 on: 
   push:
       branches:
-        - spring-security
+        - react-native
 
 jobs:
   build:
