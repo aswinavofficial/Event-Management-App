@@ -1,9 +1,11 @@
 # Eventify
 
-[Frontend](https://eventify-app.netlify.app)
+[Frontend](https://angry-keller-52ae0c.netlify.app)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cc3191eb-0970-4cce-9729-966d60b3be06/deploy-status)](https://app.netlify.com/sites/eventify-app/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5a8696fa-2546-4438-b2db-cd71a61d6d78/deploy-status)](https://app.netlify.com/sites/angry-keller-52ae0c/deploys)
 
-[Backend](https://eventify-2aknj4a4kq-el.a.run.app)
+[Backend](https://eventify-springsecurity-2aknj4a4kq-el.a.run.app)
 
-[![Google Cloud Run Deployment](https://github.com/aswinavofficial/Event-Management-App/actions/workflows/cloud-run-action.yaml/badge.svg)](https://github.com/aswinavofficial/Event-Management-App/actions/workflows/cloud-run-action.yaml)
+[![publish-spring-security](https://github.com/aswinavofficial/Event-Management-App/actions/workflows/cloud-run-action-spring-security.yaml/badge.svg)](https://github.com/aswinavofficial/Event-Management-App/actions/workflows/cloud-run-action-spring-security.yaml)
+
+

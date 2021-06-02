@@ -34,3 +34,5 @@ build/
 
 
 src/main/resources/application-gcloud.properties
+src/main/resources/application.properties
+frontend/src/Settings.js

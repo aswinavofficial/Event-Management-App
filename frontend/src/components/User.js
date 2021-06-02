@@ -7,7 +7,7 @@ import {BASE_URL} from '../Settings';
 
 import './css/User.css';
 
-function User({ isLoading }) {
+function User() {
 
   const [users, setUsers] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -16,27 +16,51 @@ function User({ isLoading }) {
 
   function getAllUsers() {
 
-    isLoading(true);
+    const options = {
+      method : 'GET',
+      mode   : 'cors',
+      headers : {
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
+      }
+    }
 
-    fetch(BASE_URL + '/user')
-      .then(res => res.json())
+    fetch(BASE_URL + '/user', options)
+    .then(res => 
+        
+      {
+        if(!res.ok){
+          console.log("GET /user failed " + res.status)
+          throw res}
+            
+        return res.json()
+
+      })
       .then(data => {
         setUsers(data)
-        isLoading(false);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err) 
+
+        err.text()
+        .then(errMessage => {
+
+          console.log(errMessage)
+          setErrorMessage(errMessage)
+
+        })
+        
+      });
   }
 
   const createUser = (user) => {
 
     hideModal();
-    isLoading(true);
-
     const options = {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
       },
       body: JSON.stringify(user)
     }
@@ -64,7 +88,6 @@ function User({ isLoading }) {
 
           console.log(errMessage)
           setErrorMessage(errMessage)
-          isLoading(false);
 
         })
         
@@ -74,10 +97,12 @@ function User({ isLoading }) {
 
   const deleteUser = (id) => {
 
-    isLoading(true);
 
     const options = {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers : {
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
+      }
     }
 
     fetch(BASE_URL + '/user/' + id, options)
@@ -93,13 +118,13 @@ function User({ isLoading }) {
   const editUser = (user) => {
 
     hideModal();
-    isLoading(true);
 
     const options = {
       method: 'PUT',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
       },
       body: JSON.stringify(user)
     }
@@ -117,7 +142,55 @@ function User({ isLoading }) {
 
   useEffect(() => {
 
-    getAllUsers()
+    let isMounted = true;               
+
+    const options = {
+      method : 'GET',
+      mode   : 'cors',
+      headers : {
+        'Authorization' : 'Bearer ' + window.localStorage.getItem('jwt')
+      }
+
+
+  }
+
+    fetch(BASE_URL + '/user',options)
+    .then(res => 
+        
+      {
+        if(!res.ok){
+          console.log("GET /user failed " + res.status)
+          throw res}
+            
+        return res.json()
+
+      })
+      .then(data => {
+
+        if(isMounted) {
+          setUsers(data)
+      }
+      })
+      .catch(err => {
+        console.error(err) 
+
+      /** 
+        err.text()
+        .then(errMessage => {
+
+          console.log(errMessage)
+          if(isMounted) {
+            setErrorMessage(errMessage)
+          }
+          isLoading(false);
+
+        }) */
+
+        
+        
+      });
+
+    return () => { isMounted = false }; 
 
   }, []);
 

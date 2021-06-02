@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.letslearn.eventify.dto.UserDTO;
+import com.letslearn.eventify.dto.UserDTORequest;
 import com.letslearn.eventify.model.User;
 import com.letslearn.eventify.service.UserService;
 import com.letslearn.eventify.util.ObjectMapperUtils;
@@ -41,13 +42,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) {
+	public UserDTO createUser(@Valid @RequestBody UserDTORequest userDTORequest) {
 		
 		log.info("PUT /user");
-		log.info(userDTO.toString());
+		log.info(userDTORequest.toString());
 		
 				
-		userDTO = userService.createUser(userDTO);
+		UserDTO userDTO = userService.createUser(userDTORequest);
 		
 		return userDTO;
 		
@@ -64,9 +65,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
-	public UserDTO updateUserDetails(@Valid @RequestBody UserDTO userDto, @PathVariable(name = "id") UUID id) {
+	public UserDTO updateUserDetails(@Valid @RequestBody UserDTORequest userDTORequest, @PathVariable(name = "id") UUID id) {
 				
-		UserDTO userDTO = userService.updateUserDetailsById(id, userDto);
+		UserDTO userDTO = userService.updateUserDetailsById(id, userDTORequest);
 				
 		return userDTO;
 

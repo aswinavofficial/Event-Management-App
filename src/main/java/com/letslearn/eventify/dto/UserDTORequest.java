@@ -5,11 +5,9 @@ import java.util.UUID;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class UserDTO {
+public class UserDTORequest {
 	
-	private UUID id;
+private UUID id;
 	
     @NotBlank(message = "Email is mandatory")
 	private String email;
@@ -26,7 +24,9 @@ public class UserDTO {
     @NotBlank(message = "Mobile Number is mandatory")
     @Size(min=10,max=10)
 	private String mobileNumber;
-
+	
+//    @NotBlank(message = "Password is mandatory")
+	private String password;
 
 	public UUID getId() {
 		return id;
@@ -76,16 +76,20 @@ public class UserDTO {
 		this.mobileNumber = mobileNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "UserDTO [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", userName=" + userName + ", mobileNumber=" + mobileNumber + "]";
+	public String getPassword() {
+		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
+	@Override
+	public String toString() {
+		return "UserDTOInput [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", userName=" + userName + ", mobileNumber=" + mobileNumber + ", password=" + "**masked**" + "]";
+	}
 	
 	
-	
-	
-	
+
 }

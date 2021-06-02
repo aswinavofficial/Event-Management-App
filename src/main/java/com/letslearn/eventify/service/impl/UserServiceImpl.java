@@ -5,11 +5,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.letslearn.eventify.dto.UserDTO;
+import com.letslearn.eventify.dto.UserDTORequest;
 import com.letslearn.eventify.exception.UserExists;
 import com.letslearn.eventify.exception.UserNotFoundException;
+import com.letslearn.eventify.model.Role;
 import com.letslearn.eventify.model.User;
 import com.letslearn.eventify.repository.UserRepository;
 import com.letslearn.eventify.service.UserService;
@@ -20,8 +23,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
 
+	
 	@Override
 	public List<UserDTO> getAllUsers() {
 		
@@ -37,40 +40,40 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public UserDTO createUser(UserDTO userDTO) {
+	public UserDTO createUser(UserDTORequest userDTORequest) {
 				
 
-		if (userDTO !=null && userDTO.getId() !=null &&
-				userRepository.findById(userDTO.getId()).isPresent()) {
+		if (userDTORequest !=null && userDTORequest.getId() !=null &&
+				userRepository.findById(userDTORequest.getId()).isPresent()) {
 			
 			throw new UserExists("Duplicate Id");
 			
 		}
 		
-		if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+		if (userRepository.findByEmail(userDTORequest.getEmail()).isPresent()) {
 			
 			throw new UserExists("Duplicate Email");
 			
 		}
 		
-		if (userRepository.findByUserName(userDTO.getUserName()).isPresent()) {
+		if (userRepository.findByUserName(userDTORequest.getUserName()).isPresent()) {
 			
 			throw new UserExists("Duplicate User Name");
 			
 		}
 		
-		if (userRepository.findByMobileNumber(userDTO.getMobileNumber()).isPresent()) {
+		if (userRepository.findByMobileNumber(userDTORequest.getMobileNumber()).isPresent()) {
 			
 			throw new UserExists("Duplicate Mobile Number");
 			
 		}
 		
 
-		User user = ObjectMapperUtils.map(userDTO, User.class);
+		User user = ObjectMapperUtils.map(userDTORequest, User.class);
 
 		user.setId(UUID.randomUUID());
 		
-		userDTO = ObjectMapperUtils.map(userRepository.save(user), UserDTO.class);
+		UserDTO userDTO = ObjectMapperUtils.map(userRepository.save(user), UserDTO.class);
 
 		return userDTO;
 	}
@@ -90,11 +93,12 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
+	
 
 	@Override
-	public UserDTO updateUserDetailsById(UUID id, UserDTO userDto) {
+	public UserDTO updateUserDetailsById(UUID id, UserDTORequest userDTORequest) {
 		
-		User user = ObjectMapperUtils.map(userDto, User.class);		
+		User user = ObjectMapperUtils.map(userDTORequest, User.class);		
 		
 		return ObjectMapperUtils.map(userRepository.save(user), UserDTO.class);
 	}
@@ -116,6 +120,9 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException(id);
 		}
 	}
+	
+	
+
 
 
 }

@@ -1,43 +1,28 @@
-import React, { useState } from 'react';
+import React,{useReducer} from 'react';
 import NavBar from './components/NavBar';
-import User from './components/User';
-import LoadingOverlay from 'react-loading-overlay';
+import Routing from './components/Routing';
+import UserContext from './contexts/UserContext';
+import { reducer, initialState } from './reducers/UserReducer';
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 import './App.css';
 
 
+const App = () => {
 
-function App() {
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const toggleIsLoading = (value) => {
-
-    setIsLoading(value);
-
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <LoadingOverlay class= "loading-overlay"
-      active={isLoading}
-      spinner
-      text='Loading ...'
-    >
+      <UserContext.Provider value={{ state, dispatch }}>
+      <Router>
       <div className="App">
-
-
         <NavBar />
-
-        <div className="container">
-          <User isLoading={toggleIsLoading} />
-
-        </div>
-
-
-
+        <Routing />
       </div>
-    </LoadingOverlay>
-
+      </Router>
+      </UserContext.Provider>
   );
 }
 
