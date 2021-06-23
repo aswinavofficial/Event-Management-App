@@ -14,9 +14,10 @@
 Deployment
 
 1. [Install & start Minikube environment](https://minikube.sigs.k8s.io/docs/start/)
-2. [Clone this repository](https://github.com/aswinavofficial/Event-Management-App)
-3. Create a docker image                -  sudo docker build -t eventify-api .
-4. Tag docker image                     -  sudo docker tag eventify-api:latest aswinavofficial/eventify-api:latest
-5. Push docker the image to Docker hub  -  sudo docker push aswinavofficial/eventify-api:latest
+2. Install ingress addons               -  minikube addons enable ingress
+3. [Clone this repository](https://github.com/aswinavofficial/Event-Management-App)
+4. Create a docker image                -  sudo docker build -t eventify-api .
+5. Tag docker image                     -  sudo docker tag eventify-api:latest aswinavofficial/eventify-api:latest
+6. Push docker the image to Docker hub  -  sudo docker push aswinavofficial/eventify-api:latest
 
 
