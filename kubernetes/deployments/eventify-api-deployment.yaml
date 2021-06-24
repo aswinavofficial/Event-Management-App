@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventify-api-deployment
+  labels:
+    app: eventify-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventify-api
+  template:
+    metadata:
+      labels:
+        app: eventify-api
+    spec:
+      containers:
+      - name: eventify-api
+        image: aswinavofficial/eventify-api:latest
+        ports:
+        - containerPort: 8027
