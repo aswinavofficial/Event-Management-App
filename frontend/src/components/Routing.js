@@ -11,6 +11,7 @@ import User from './User';
 import Profile from './Profile';
 import Events from './Events';
 import QRScanner from './QRScanner';
+import EventBooking from './EventBooking';
 import UserContext from '../contexts/UserContext';
 
 
@@ -51,6 +52,9 @@ const Routing = () => {
           </Route>
           <Route path="/profile">
           <Profile />
+          </Route>
+          <Route path="/booking">
+          <EventBooking />
           </Route>
           <Route path="/qr">
           <QRScanner />

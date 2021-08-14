@@ -36,6 +36,16 @@ const Home = () =>  {
 </div>
 </Link>
 
+
+
+<Link className="link" to="/booking">
+
+<div className="item-box">
+<img className="img-icon" src={EventsImg} alt="BOOKING" />
+<p>Booking</p>
+</div>
+</Link>
+
 <Link className="link" to="/qr">
 
 <div className="item-box">
