@@ -21,3 +21,6 @@ Deployment
 6. Push docker the image to Docker hub  -  sudo docker push aswinavofficial/eventify-api:latest
 
 
+Sonar Cloud Configured
+
+
