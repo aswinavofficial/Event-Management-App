@@ -20,7 +20,10 @@ Deployment
 5. Tag docker image                     -  sudo docker tag eventify-api:latest aswinavofficial/eventify-api:latest
 6. Push docker the image to Docker hub  -  sudo docker push aswinavofficial/eventify-api:latest
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
 
-Sonar Cloud Configured
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aswinavofficial_Event-Management-App&metric=ncloc)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aswinavofficial_Event-Management-App&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
 
 
