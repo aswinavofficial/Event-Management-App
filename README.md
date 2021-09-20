@@ -22,6 +22,8 @@ Deployment
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aswinavofficial_Event-Management-App&metric=alert_status)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
+
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=aswinavofficial_Event-Management-App&metric=ncloc)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=aswinavofficial_Event-Management-App&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=aswinavofficial_Event-Management-App)
